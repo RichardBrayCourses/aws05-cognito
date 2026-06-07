@@ -1,0 +1,44 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "bootstrap-up": "pnpm -C scripts run bootstrap-up",
+    "bootstrap-down": "pnpm -C scripts run bootstrap-down",
+    "api:test": "tsx scripts/src/api-test.ts",
+    "api:bulk-image-upload": "tsx scripts/src/api-bulk-image-upload.ts",
+    "cognito:get-token": "tsx scripts/src/cognito-get-token.ts",
+    "cognito:test-users": "tsx scripts/src/ensure-cognito-test-users.ts",
+    "cdk:deploy:website": "pnpm -C cdk run cdk:deploy:website",
+    "cdk:destroy:website": "pnpm -C cdk run cdk:destroy:website",
+    "cdk:deploy:cognito": "pnpm -C cdk run cdk:deploy:cognito",
+    "cdk:destroy:cognito": "pnpm -C cdk run cdk:destroy:cognito",
+    "cdk:deploy:images": "pnpm -C cdk run cdk:deploy:images",
+    "cdk:destroy:images": "pnpm -C cdk run cdk:destroy:images",
+    "cdk:deploy:api": "pnpm -C cdk run cdk:deploy:api",
+    "cdk:destroy:api": "pnpm -C cdk run cdk:destroy:api",
+    "api:dev": "pnpm -C services/api run dev",
+    "ui:dev": "pnpm -C apps/ui run dev",
+    "ui:generate-env": "bash scripts/generate-ui-env.sh",
+    "ui:build": "pnpm -C apps/ui run build",
+    "ui:preview": "pnpm -C apps/ui run preview",
+    "ui:upload": "bash scripts/upload-ui.sh",
+    "ui:url": "bash scripts/get-ui-url.sh",
+    "invalidate-cloudfront": "bash scripts/invalidate-cloudfront.sh",
+    "deploy-website": "pnpm run ui:build && pnpm run ui:upload && pnpm run invalidate-cloudfront",
+    "deploy-everything": "pnpm run cdk:deploy:website && pnpm run cdk:deploy:cognito && pnpm run cdk:deploy:images && pnpm run cdk:deploy:api && pnpm run ui:generate-env && pnpm run deploy-website",
+    "destroy-everything": "pnpm run cdk:destroy:api && pnpm run cdk:destroy:images && pnpm run cdk:destroy:cognito && pnpm run cdk:destroy:website",
+    "type-check": "pnpm -r type-check ",
+    "package-cleanup": "pnpm -r package-cleanup && rm -rf node_modules "
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "esbuild": "0.27.7",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.1063.0",
+    "@aws-sdk/client-ssm": "^3.1063.0"
+  }
+}

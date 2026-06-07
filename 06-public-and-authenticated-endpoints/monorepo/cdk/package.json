@@ -1,0 +1,27 @@
+{
+  "name": "@root/cdk",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "cdk:deploy:website": "cdk deploy website-stack --require-approval never --app \"tsx ./src/bin/website.ts\"",
+    "cdk:destroy:website": "cdk destroy website-stack --force --require-approval never --app \"tsx ./src/bin/website.ts\"",
+    "cdk:deploy:cognito": "cdk deploy cognito-stack --require-approval never --app \"tsx ./src/bin/cognito.ts\"",
+    "cdk:destroy:cognito": "cdk destroy cognito-stack --force --require-approval never --app \"tsx ./src/bin/cognito.ts\"",
+    "cdk:deploy:images": "cdk deploy images-stack --require-approval never --app \"tsx ./src/bin/images.ts\"",
+    "cdk:destroy:images": "cdk destroy images-stack --force --require-approval never --app \"tsx ./src/bin/images.ts\"",
+    "cdk:deploy:api": "cdk deploy api-stack --require-approval never --app \"tsx ./src/bin/api.ts\"",
+    "cdk:destroy:api": "cdk destroy api-stack --force --require-approval never --app \"tsx ./src/bin/api.ts\"",
+    "type-check": "tsc --noEmit",
+    "package-cleanup": "rm -rf node_modules cdk.out"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.235.1",
+    "constructs": "10.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.1",
+    "esbuild": "0.27.7",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "bootstrap-up": "pnpm -C scripts run bootstrap-up",
+    "bootstrap-down": "pnpm -C scripts run bootstrap-down",
+    "bulk-image-upload": "sh scripts/bulk-image-upload.sh",
+    "cdk:deploy:website": "pnpm -C cdk run cdk:deploy:website",
+    "cdk:destroy:website": "pnpm -C cdk run cdk:destroy:website",
+    "cdk:deploy:cognito": "pnpm -C cdk run cdk:deploy:cognito",
+    "cdk:destroy:cognito": "pnpm -C cdk run cdk:destroy:cognito",
+    "cdk:deploy:images": "pnpm -C cdk run cdk:deploy:images",
+    "cdk:destroy:images": "pnpm -C cdk run cdk:destroy:images",
+    "cdk:deploy:api": "pnpm -C cdk run cdk:deploy:api",
+    "cdk:destroy:api": "pnpm -C cdk run cdk:destroy:api",
+    "api:dev": "pnpm -C services/api run dev",
+    "ui:dev": "pnpm -C apps/ui run dev",
+    "ui:generate-env": "bash scripts/generate-ui-env.sh",
+    "ui:build": "pnpm -C apps/ui run build",
+    "ui:preview": "pnpm -C apps/ui run preview",
+    "ui:upload": "bash scripts/upload-ui.sh",
+    "invalidate-cloudfront": "bash scripts/invalidate-cloudfront.sh",
+    "deploy-website": "pnpm run ui:build && pnpm run ui:upload && pnpm run invalidate-cloudfront",
+    "deploy-everything": "pnpm run cdk:deploy:website && pnpm run cdk:deploy:cognito && pnpm run cdk:deploy:images && pnpm run cdk:deploy:api && pnpm run ui:generate-env && pnpm run deploy-website",
+    "destroy-everything": "pnpm run cdk:destroy:api && pnpm run cdk:destroy:images && pnpm run cdk:destroy:cognito && pnpm run cdk:destroy:website",
+    "type-check": "pnpm -r type-check ",
+    "package-cleanup": "pnpm -r package-cleanup && rm -rf node_modules "
+  },
+  "devDependencies": {
+    "esbuild": "0.27.7"
+  }
+}
